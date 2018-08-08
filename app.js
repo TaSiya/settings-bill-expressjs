@@ -10,7 +10,7 @@ app.use(express.static('public'));
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
-
+ 
 // parse application/json
 app.use(bodyParser.json());
 
@@ -24,7 +24,7 @@ app.get('/', function(req, res){
 	let critLevel = bill.getCriticalLevel();
 	var calls = bill.getCall();
 	var smss = bill.getSms();
-	var grandTotal = bill.getTotals();
+	var grandTotal = bill.getTotals().toFixed(2);
 	let colour ;
 	if(bill.getTotals() >= bill.getCriticalLevel()){
 		colour = 'danger';
