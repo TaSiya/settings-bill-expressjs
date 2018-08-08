@@ -49,9 +49,9 @@ app.post("/action", function(req, res){
 	res.redirect('/');
 });
 
-// app.get("/actions", function(){
-
-// });
+app.get("/actions", function(req, res){
+	res.render('actions');
+});
 
 // app.get("/actions/:type", function(){
 
