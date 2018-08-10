@@ -20,3 +20,7 @@
   font-weight: bold;
   font-size: 2em;
 }
+
+th,td{
+  padding-right : 5rem;
+}

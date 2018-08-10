@@ -1,8 +1,10 @@
+var moment = require('moment');
 
 module.exports = function SettingsBill(){
     var call = 0;
     var sms = 0;
     var total = 0;
+    var stampMap = [];
  
     var callCost = 2 ;
     var smsCost = 0.65;
@@ -46,14 +48,50 @@ module.exports = function SettingsBill(){
           }
        }
     }
+
+
+
+    function timeStamping(value){
+        let map = {};
+        var d = new Date();
+        var m = moment(d).fromNow();
+        if(value === "call"){
+            stampMap.push({
+                type : value,
+                price : getCalls(),
+                when : d,
+                mom : m
+            });
+        }
+        else if (value === "sms"){
+            stampMap.push({
+                type : value,
+                price : getSmses(),
+                when : d,
+                mom : m
+            });
+        }
+    }
+
+    function filterStamps(value){
+        let tempStamps = [];
+
+        for(var i = 0 ; i < stampMap.length; i++){
+            if(stampMap[i].type === value){
+                tempStamps.push(stampMap[i]);
+            }
+        }
+        return tempStamps;
+    }
  
-    function getTotal(){return total;}
-    function getCalls(){return call;}
-    function getSmses(){return sms;}
+    function getTotal(){return total.toFixed(2);}
+    function getCalls(){return call.toFixed(2);}
+    function getSmses(){return sms.toFixed(2);}
     function getCallCost(){return callCost;}
     function getSmsCost(){return smsCost;}
     function getWarning(){return warning;}
     function getCritical(){return critical;}
+    function getStamps(){return stampMap;}
  
     function setCritical(value){critical = value;}
     function setWarning(value){warning = value;}
@@ -74,7 +112,10 @@ module.exports = function SettingsBill(){
        setWarn : setWarning,
        setCall : setCallCost,
        setSms : setSmsCost,
-       allValues : allValues
+       allValues : allValues,
+       stamps : timeStamping,
+       gettingStamps : getStamps,
+       filter : filterStamps
     }
  }
  

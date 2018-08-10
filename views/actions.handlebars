@@ -1,9 +1,18 @@
-<h1> Actions </h1>
+<h1> Stamps for the App </h1>
 
 <table>
-	<th>
-		<td>Type</td>
-		<td>Price </type>
-		<td>When </td>
-	</th>
+	<tr>
+		<th>Type</th>
+		<th>Price</th>
+		<th>Stamp Date</th>
+		<th>Long ago</th>
+	</tr>
+	{{#each stampMap}}
+	<tr>
+		<td>{{type}}</td>
+		<td>{{price}}</td>
+		<td>{{when}}</td>
+		<td>{{mom}}</td>
+	</tr>
+	{{/each}}
 </table>

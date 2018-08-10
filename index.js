@@ -1,8 +1,9 @@
 let express = require('express');
 const exphbs = require('express-handlebars');
 var bodyParser = require('body-parser');
-const app = express();
 const SettingsBill = require("./settings-bill");
+
+const app = express();
 
 var bill = SettingsBill();
 
@@ -24,7 +25,7 @@ app.get('/', function(req, res){
 	let critLevel = bill.getCriticalLevel();
 	var calls = bill.getCall();
 	var smss = bill.getSms();
-	var grandTotal = bill.getTotals().toFixed(2);
+	var grandTotal = bill.getTotals();
 	let colour ;
 	if(bill.getTotals() >= bill.getCriticalLevel()){
 		colour = 'danger';
@@ -46,16 +47,19 @@ app.post("/settings", function(req, res){
 app.post("/action", function(req, res){
 	let value = req.body.actionType;
 	bill.calculated(value);
+	bill.stamps(value);
+	
 	res.redirect('/');
 });
 
 app.get("/actions", function(req, res){
-	res.render('actions');
+	res.render('actions',{stampMap : bill.gettingStamps()});
 });
 
-// app.get("/actions/:type", function(){
-
-// });
+app.get("/actions/:type", function(req, res){
+	let temp = req.params.type;
+	res.render('actions',{stampMap : bill.filter(temp)});
+});
 
 const PORT = process.env.PORT || 3007 ;
 app.listen(PORT, function(){
