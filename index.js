@@ -1,6 +1,7 @@
 let express = require('express');
 const exphbs = require('express-handlebars');
 var bodyParser = require('body-parser');
+
 const SettingsBill = require("./settings-bill");
 
 const app = express();
@@ -55,9 +56,10 @@ app.post("/action", function(req, res){
 app.get("/actions", function(req, res){
 	res.render('actions',{stampMap : bill.gettingStamps()});
 });
-
+	
 app.get("/actions/:type", function(req, res){
 	let temp = req.params.type;
+	bill.gettingStamps();
 	res.render('actions',{stampMap : bill.filter(temp)});
 });
 

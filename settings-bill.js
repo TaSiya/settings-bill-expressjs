@@ -51,16 +51,15 @@ module.exports = function SettingsBill(){
 
 
 
-    function timeStamping(value){
-        let map = {};
+    function timeStamping(value, current){
+        // let map = {};
         var d = new Date();
-        var m = moment(d).fromNow();
+       
         if(value === "call"){
             stampMap.push({
                 type : value,
                 price : getCalls(),
                 when : d,
-                mom : m
             });
         }
         else if (value === "sms"){
@@ -68,7 +67,6 @@ module.exports = function SettingsBill(){
                 type : value,
                 price : getSmses(),
                 when : d,
-                mom : m
             });
         }
     }
@@ -83,6 +81,13 @@ module.exports = function SettingsBill(){
         }
         return tempStamps;
     }
+
+    function getStamps(){
+        for(var i = 0 ; i < stampMap.length ; i++){
+            stampMap[i].mom = moment(stampMap[i].when).fromNow();
+        }
+        return stampMap;
+    }
  
     function getTotal(){return total.toFixed(2);}
     function getCalls(){return call.toFixed(2);}
@@ -91,7 +96,7 @@ module.exports = function SettingsBill(){
     function getSmsCost(){return smsCost;}
     function getWarning(){return warning;}
     function getCritical(){return critical;}
-    function getStamps(){return stampMap;}
+    
  
     function setCritical(value){critical = value;}
     function setWarning(value){warning = value;}
