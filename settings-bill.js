@@ -46,24 +46,25 @@ module.exports = function SettingsBill(){
                 sms -= smsCost;
              }
           }
+          timeStamping(value);
        }
     }
 
 
 
-    function timeStamping(value, current){
+    function timeStamping(value){
         // let map = {};
         var d = new Date();
        
         if(value === "call"){
-            stampMap.push({
+            stampMap.unshift({
                 type : value,
                 price : getCalls(),
                 when : d,
             });
         }
         else if (value === "sms"){
-            stampMap.push({
+            stampMap.unshift({
                 type : value,
                 price : getSmses(),
                 when : d,
@@ -92,6 +93,7 @@ module.exports = function SettingsBill(){
     function getTotal(){return total.toFixed(2);}
     function getCalls(){return call.toFixed(2);}
     function getSmses(){return sms.toFixed(2);}
+
     function getCallCost(){return callCost;}
     function getSmsCost(){return smsCost;}
     function getWarning(){return warning;}

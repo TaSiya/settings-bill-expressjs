@@ -48,7 +48,6 @@ app.post("/settings", function(req, res){
 app.post("/action", function(req, res){
 	let value = req.body.actionType;
 	bill.calculated(value);
-	bill.stamps(value);
 	
 	res.redirect('/');
 });
