@@ -82,7 +82,7 @@ describe('Settings bill widget', function(){
           referenced6.calculated('sms');
           referenced6.calculated('sms');
           referenced6.calculated('sms');
-          assert.equal(referenced6.getTotals(),19.95)
+          assert.equal(referenced6.getTotals(),20.6)
        });
     });
 

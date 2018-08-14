@@ -24,7 +24,7 @@ module.exports = function SettingsBill(){
     }
  
     function calculatingTotal(value){
-       if(total > critical){
+       if(total >= critical){
  
        }
        else{
