@@ -35,17 +35,17 @@ module.exports = function SettingsBill(){
              sms = sms + smsCost;
           }
           total = call + sms;
-          if(total > critical){
-             if(value === 'call'){
-                total -= callCost;
-                call -= callCost;
+        //   if(total > critical){
+        //      if(value === 'call'){
+        //         total -= callCost;
+        //         call -= callCost;
  
-             }
-             else if (value === 'sms'){
-                total -= smsCost;
-                sms -= smsCost;
-             }
-          }
+        //      }
+        //      else if (value === 'sms'){
+        //         total -= smsCost;
+        //         sms -= smsCost;
+        //      }
+        //   }
           timeStamping(value);
        }
     }
